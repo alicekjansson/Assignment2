@@ -17,6 +17,10 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 #Measure time taken
 start=time.time()
 
+#Import testing and learning sets
+learning=pd.read_csv()
+testing=pd.read_csv()
+
 # Find k nearest neighbours in learning set for this timestep
 # Input parameters timestep (this datapoint), k (nbr of nearest neighbours), col (column defining the type of each data point) 
 # Return list of k nearest data points
@@ -40,7 +44,7 @@ def occurances(timestep,typ,col):
 
 #First find list of types
 types = []
-for i,row in df.items():
+for i,row in learning.items():
     if row[col] not in types:
         types.append(row[col])
 
