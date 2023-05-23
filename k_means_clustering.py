@@ -13,6 +13,8 @@ import time
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+#Measure time taken
+start=time.time()
 
 # Initialize centroids by drawing a random value in each column as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
@@ -59,7 +61,7 @@ def calc_centroids(clusters,centroids):
         centroids[n]=np.array(cs)
     return centroids
 
-#Check the frequency of different values in each 
+# Check the frequency of different values in each 
 # Input parameters df (dataframe containing data points), col (column defining the type of each data point) 
 #                  and clusters (clusters containing given data points)
 # Returns list of probabilities of the data points in a cluster being of the same type as the most commonly occuring data type in this cluster
@@ -102,6 +104,13 @@ while dist > 0.01:
     
 #Check accuracy
 probabilities=check_accuracy(clusters)
+
+
+
+#Check the time it took for the script to run
+end=time.time()
+print('Time elapsed: ' + str(round(end-start,2)) + 's')
+print('The probabilities are: ' + str(probabilities) )
 
 
     
