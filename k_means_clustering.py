@@ -87,6 +87,9 @@ def check_accuracy(df,col,clusters):
     return probabilities
 
 
+#START BY NORMALIZING DATA SETS!
+
+
 #Decide number of clusters to be used and randomly generate first centroids
 k=3        
 centroids=initialize(df,k)

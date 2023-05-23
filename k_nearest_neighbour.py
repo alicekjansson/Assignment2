@@ -21,6 +21,9 @@ start=time.time()
 learning=pd.read_csv()
 testing=pd.read_csv()
 
+#START BY NORMALIZING DATA SETS!
+
+
 # Find k nearest neighbours in learning set for this timestep
 # Input parameters timestep (this datapoint), k (nbr of nearest neighbours), col (column defining the type of each data point) 
 # Return list of k nearest data points
