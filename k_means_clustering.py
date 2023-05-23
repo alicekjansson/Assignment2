@@ -17,10 +17,10 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 # Initialize centroids by drawing a random value in each column as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
 # Returns list of calculated centroids
-def initialize(df,nbr):
+def initialize(df,k):
     centroids=[]
     #For 
-    for n in nbr:
+    for n in k:
         cent=[]
         for i,col in df.items():
             cent.append(col.sample(1))
@@ -84,9 +84,12 @@ def check_accuracy(df,col,clusters):
         probabilities.append(freq.max())
     return probabilities
 
+
+#Decide number of clusters to be used and randomly generate first centroids
+k=3        
+centroids=initialize(df,k)
 #Run algorithm
 dist=1
-centroids=initialize(df,18)
 while dist > 0.01:   
     clusters=[ [] for el in range(18)] 
     #Divide data points into clusters       
