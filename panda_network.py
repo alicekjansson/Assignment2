@@ -48,9 +48,10 @@ def create_network(plot_network=False):
     line78 = pp.create_line(net, bus7, bus8, length_km = line_length, std_type= line_type, name = net.bus.at[bus7,'name']+'-'+net.bus.at[bus8,'name'])
     line89 = pp.create_line(net, bus8, bus9, length_km = line_length, std_type= line_type, name = net.bus.at[bus8,'name']+'-'+net.bus.at[bus9,'name']) 
     
+    #optional network plot
     if plot_network == True:
         plot.simple_plot(net, plot_loads = True, plot_gens=True)
     
     return net
                        
-net = create_network(True)
+net = create_network()
