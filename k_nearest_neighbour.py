@@ -6,7 +6,6 @@ Created on Tue May 23 09:56:26 2023
 """
 #This script holds the algorithm of k-nearest neighbour classification
 
-
 import pandas as pd
 import numpy as np
 import time
