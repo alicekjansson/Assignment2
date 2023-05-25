@@ -17,7 +17,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 start=time.time()
 
 #Import data
-vm=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/res_bus\vm_pu.csv',';')
+df_vm=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_vm.csv')
+df_va=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_va.csv')
 
 # Initialize centroids by drawing a random value in each column as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
