@@ -25,11 +25,11 @@ df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assig
 # Returns list of calculated centroids
 def initialize(df,k):
     centroids=[]
-    #For 
+    df=df.drop('Scenario',axis=1)
     for n in range(k):
         cent=[]
         for i,col in df.items():
-            cent.append(col.sample(1))
+            cent.append(float(col.sample(1)))
         centroids.append(cent)
     return centroids
 
@@ -37,7 +37,8 @@ def initialize(df,k):
 # Input parameters df (dataframe containing data points), clusters (defined clusters to divide data into) and centroids (centroids of clusters)
 # Returns list of clusters containing their data points
 def get_clusters(df,clusters,centroids):
-    for i,row in df.transpose().items():
+    df1=df.drop('Scenario',axis=1)
+    for i,row in df1.transpose().items():
         coord=np.array(row)
         min_dist=(None,100)
         n=0
@@ -47,7 +48,7 @@ def get_clusters(df,clusters,centroids):
             if dist<min_dist[1]:
                 min_dist=(n,dist)
             n=n+1
-        clusters[min_dist[0]].append(row)
+        clusters[min_dist[0]].append(df.loc[i])
     #Convert clusters to dataframe format then add back to clusters list
     for i,cluster in enumerate(clusters):
         cluster=pd.DataFrame(cluster)
@@ -59,6 +60,7 @@ def get_clusters(df,clusters,centroids):
 # Returns list of new centroids
 def calc_centroids(clusters,centroids):
     for n,cluster in enumerate(clusters):
+        cluster=cluster.drop('Scenario',axis=1)
         cs=[]
         for i,row in cluster.items():
             cs.append(row.mean())
@@ -95,12 +97,12 @@ def check_accuracy(df,col,clusters):
 
 
 #Decide number of clusters to be used and randomly generate first centroids
-k=3        
+k=2     
 centroids=initialize(df,k)
 #Run algorithm
 dist=1
+clusters=[ [] for el in range(k)] 
 while dist > 0.01:   
-    clusters=[ [] for el in range(18)] 
     #Divide data points into clusters       
     clusters=get_clusters(df,clusters,centroids)
     cent_old=centroids
