@@ -16,6 +16,9 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 #Measure time taken
 start=time.time()
 
+#Import data
+vm=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/res_bus\vm_pu.csv',';')
+
 # Initialize centroids by drawing a random value in each column as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
 # Returns list of calculated centroids
