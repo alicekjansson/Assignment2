@@ -13,12 +13,12 @@ import time
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-#Measure time taken
+# Measure time taken
 start=time.time()
 
-#Import data
-df_vm=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_vm.csv')
-df_va=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_va.csv')
+# Import data
+# 0-8 are voltage magnitudes, 9-17 are voltage angles
+df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/learning_set.csv').iloc[:,1:]
 
 # Initialize centroids by drawing a random value in each column as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
@@ -26,7 +26,7 @@ df_va=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/As
 def initialize(df,k):
     centroids=[]
     #For 
-    for n in k:
+    for n in range(k):
         cent=[]
         for i,col in df.items():
             cent.append(col.sample(1))
