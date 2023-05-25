@@ -47,7 +47,7 @@ net, load_profiles_p, load_profiles_q, gen_profiles = timeseries(net, no_timeste
 create_controllers(net, load_profiles_p, load_profiles_q, gen_profiles)
 
 #log results in current folder
-ow = OutputWriter(net, output_path="./", output_file_type=".xlsx")
+ow = OutputWriter(net, output_path="./", output_file_type=".csv")
 #initiate log_variables in OutputWriter didn't work. Therefore ugly workaround below
 ow.log_variable('res_bus', 'va_degree')
 ow.remove_log_variable('res_line','loading_percent')
