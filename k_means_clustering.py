@@ -74,53 +74,58 @@ def check_accuracy(df,col,clusters):
     for cluster in clusters:
         types = []
         #First check which types are present at all in cluster
-        for i,row in cluster.items():
+        for i,row in cluster.transpose().items():
             if row[col] not in types:
                 types.append(row[col])
         #Then calculate how many times each type occurs
         occ=[0 for el in range(len(types))]
         for i,typ in enumerate(types):
-            for el in cluster:
-                kind=cluster[col]
+            for j,el in cluster.transpose().items():
+                kind=el[col]
                 if typ == kind:
                     occ[i]+=1
         
         #Then calculate the probability of each data point being of the most common type
         freq=[occurence/len(cluster) for occurence in occ]
-        probabilities.append(freq.max())
+        probabilities.append(np.max(freq))
     return probabilities
 
+#Normalize dataframe
+def normalize(df):
+    for i,col in df.items():
+        if i!= 'Scenario':
+            df[i] = col-col.mean()
+    return df
 
-#START BY NORMALIZING DATA SETS!
-
+#Start by normalizing the dataframe
+df=normalize(df)
 
 #Decide number of clusters to be used and randomly generate first centroids
 k=4 
 centroids=initialize(df,k)
 #Run algorithm
-dist=1
+dist=1000
+old_dist=1
 clusters=[ [] for el in range(k)] 
 count=0
-while dist > 0.01:   
+while abs(dist-old_dist) > 0.1:    
     #Divide data points into clusters       
     clusters=get_clusters(df,clusters,centroids)
     cent_old=centroids
     #Calculate new centroids
     centroids=calc_centroids(clusters,centroids)
     #Calculate distance of new centroids to old
-    dist=np.linalg.norm(cent_old-centroids)
+    old_dist=dist
+    tot_dist=0
+    for i,cent in enumerate(centroids):
+        tot_dist=tot_dist+np.linalg.norm(cent-cent[i])
+    dist=tot_dist/4
     count+=1
     
 #Check accuracy
-probabilities=check_accuracy(clusters)
-
-
+probabilities=check_accuracy(df,'Scenario',clusters)
 
 #Check the time it took for the script to run
 end=time.time()
 print('Time elapsed: ' + str(round(end-start,2)) + 's')
 print('The probabilities are: ' + str(probabilities) )
-
-
-    
-    
