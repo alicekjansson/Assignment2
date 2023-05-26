@@ -20,16 +20,14 @@ start=time.time()
 # 0-8 are voltage magnitudes, 9-17 are voltage angles
 df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/learning_set.csv').iloc[:,1:]
 
-# Initialize centroids by drawing a random value in each column as initial guess
+# Initialize centroids by drawing a random timestep as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
 # Returns list of calculated centroids
 def initialize(df,k):
     centroids=[]
     df=df.drop('Scenario',axis=1)
     for n in range(k):
-        cent=[]
-        for i,col in df.items():
-            cent.append(float(col.sample(1)))
+        cent=[df.sample(1)]
         centroids.append(cent)
     return centroids
 
@@ -97,11 +95,12 @@ def check_accuracy(df,col,clusters):
 
 
 #Decide number of clusters to be used and randomly generate first centroids
-k=2     
+k=4 
 centroids=initialize(df,k)
 #Run algorithm
 dist=1
 clusters=[ [] for el in range(k)] 
+count=0
 while dist > 0.01:   
     #Divide data points into clusters       
     clusters=get_clusters(df,clusters,centroids)
@@ -110,6 +109,7 @@ while dist > 0.01:
     centroids=calc_centroids(clusters,centroids)
     #Calculate distance of new centroids to old
     dist=np.linalg.norm(cent_old-centroids)
+    count+=1
     
 #Check accuracy
 probabilities=check_accuracy(clusters)
