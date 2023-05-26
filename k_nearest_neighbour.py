@@ -17,8 +17,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 start=time.time()
 
 #Import testing and learning sets
-learning=pd.read_csv()
-testing=pd.read_csv()
+learning=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\learning_set.csv')
+testing=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\testing_set.csv')
 
 #START BY NORMALIZING DATA SETS!
 

@@ -35,7 +35,7 @@ net = create_network()
 
 #choose scenario
 # scenarios: high load, low load, gen disconnect, line disconnect
-scenario = 'high load'
+scenario = 'line disconnect'
 
 #choose no of timesteps
 no_timesteps = 10

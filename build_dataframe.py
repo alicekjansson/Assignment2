@@ -11,7 +11,7 @@ import pandas as pd
 
 #Import csv file and convert to dataframe, add info on scenario
 def import_df(el,typ):
-    df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/res_bus\%s_%s.csv' %(el,typ) ,';'  ) 
+    df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/res_bus\test_%s_%s.csv' %(el,typ) ,';'  ) 
     df=df.iloc[:,1:]
     df['Scenario1']=[typ for _ in range(len(df))]
     return df
@@ -32,6 +32,5 @@ df_va.columns=[9,10,11,12,13,14,15,16,17,'Scenario']
 df_all=pd.merge(df_vm,df_va,left_on=df_vm.index,right_on=df_va.index)
 df_all=df_all.drop(['key_0','Scenario1'],axis=1)
 
-# df_vm.to_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_vm.csv')
-# df_va.to_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/df_va.csv')
-df_all.to_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/learning_set.csv')
+#Save to csv
+# df_all.to_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/testing_set.csv')
