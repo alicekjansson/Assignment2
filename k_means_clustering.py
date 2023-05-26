@@ -65,7 +65,7 @@ def calc_centroids(clusters,centroids):
         centroids[n]=np.array(cs)
     return centroids
 
-# Check the frequency of different values in each 
+# Check the frequency of different values in each cluster
 # Input parameters df (dataframe containing data points), col (column defining the type of each data point) 
 #                  and clusters (clusters containing given data points)
 # Returns list of probabilities of the data points in a cluster being of the same type as the most commonly occuring data type in this cluster
@@ -90,7 +90,7 @@ def check_accuracy(df,col,clusters):
         probabilities.append(np.max(freq))
     return probabilities
 
-#Normalize dataframe
+#Normalize dataframe by dividing by column mean value in each column
 def normalize(df):
     for i,col in df.items():
         if i!= 'Scenario':
