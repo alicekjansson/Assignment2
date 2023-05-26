@@ -17,8 +17,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 start=time.time()
 
 #Import testing and learning sets
-learning=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\learning_set.csv')
-testing=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\testing_set.csv')
+learning=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\learning_set.csv').iloc[:,1:]
+testing=pd.read_csv(r'C:\Users\Alice\OneDrive - Lund University\Dokument\GitHub\Assignment2\testing_set.csv').iloc[:,1:]
 
 #START BY NORMALIZING DATA SETS!
 
@@ -36,37 +36,44 @@ def find_neighbors(timestep,k,col):
     neighbors=pd.DataFrame(neighbors,columns=['Type','Dist']).sort_values(by=['Dist'],axis=0).iloc[:k,:]
     return neighbors
 
-def occurances(timestep,typ,col):
+def occurances(neighbors,typ):
     occ=0
-    for el in timestep:
-        kind=el[col]
-        if typ == kind:
-            occ[i]+=1
+    for el in neighbors['Type']:
+        if typ == el:
+            occ+=1
     return occ
 
+#Normalize dataframe by dividing by column mean value in each column
+def normalize(df):
+    for i,col in df.items():
+        if i!= 'Scenario':
+            df[i] = col-col.mean()
+    return df
+
+#Start by normalizing the dataframe
+learning=normalize(learning)
+testing=normalize(testing)
+
 #First find list of types
-types = []
-for i,row in learning.items():
-    if row[col] not in types:
-        types.append(row[col])
+scens = ['high','low','gendisc','linedisc']
 
 #Find k nearest neighbors and let that classify data point
 k=3
 pred=[]
 for i,timestep in testing.transpose().items():
-    neighbors=find_neighbors(timestep,k)
+    neighbors=find_neighbors(timestep,k,'Scenario')
     # print(neighbors)
     most_likely=(False,0)
-    for typ in types:
-        occurance=occurances(timestep,typ)
+    for scen in scens:
+        occurance=occurances(neighbors,scen)
         if occurance>most_likely[1]:
-            most_likely=(typ,occurance)
+            most_likely=(scen,occurance)
     pred.append(most_likely[0])
 #Add predicted values to column in testing data set
 testing['Predicted']=pred
 
 #Check accuracy of prediction
-correct=testing['Species']==testing['Predicted']
+correct=testing['Scenario']==testing['Predicted']
 accuracy=len([x for x in correct if x==True])/len(correct)
 
 
