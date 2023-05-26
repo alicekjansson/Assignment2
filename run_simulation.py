@@ -35,10 +35,10 @@ net = create_network()
 
 #choose scenario
 # scenarios: high load, low load, gen disconnect, line disconnect
-scenario = 'line disconnect'
+scenario = 'high load'
 
 #choose no of timesteps
-no_timesteps = 30
+no_timesteps = 10
 
 #generate timeseries and update network config depending on scenario choice
 net, load_profiles_p, load_profiles_q, gen_profiles = timeseries(net, no_timesteps, scenario)
