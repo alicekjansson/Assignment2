@@ -20,7 +20,6 @@ start=time.time()
 learning=pd.read_csv(r'./learning_set.csv').iloc[:,1:]
 testing=pd.read_csv(r'./testing_set.csv').iloc[:,1:]
 
-#START BY NORMALIZING DATA SETS!
 
 
 # Find k nearest neighbours in learning set for this timestep
