@@ -26,8 +26,10 @@ df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assig
 def initialize(df,k):
     centroids=[]
     df=df.drop('Scenario',axis=1)
-    for n in range(k):
-        cent=[df.sample(1)]
+    dfcentroids=df.sample(k)
+    print(dfcentroids)
+    for n,row in dfcentroids.transpose().items():
+        cent=np.array(row)
         centroids.append(cent)
     return centroids
 
