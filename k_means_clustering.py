@@ -18,7 +18,7 @@ start=time.time()
 
 # Import data
 # 0-8 are voltage magnitudes, 9-17 are voltage angles
-df=pd.read_csv(r'./.csv').iloc[:,1:]
+df=pd.read_csv(r'./learning_set.csv').iloc[:,1:]
 
 # Initialize centroids by drawing a random timestep as initial guess
 # Input parameters df (dataframe containing data points) and nbr (number of centroids to be calculated)
