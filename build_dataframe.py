@@ -11,7 +11,7 @@ import pandas as pd
 
 #Import csv file and convert to dataframe, add info on scenario
 def import_df(el,typ):
-    df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assignment2/res_bus\test_%s_%s.csv' %(el,typ) ,';'  ) 
+    df=pd.read_csv(r'./res_bus\test_%s_%s.csv' %(el,typ) ,';'  ) 
     df=df.iloc[:,1:]
     df['Scenario1']=[typ for _ in range(len(df))]
     return df
