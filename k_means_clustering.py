@@ -88,7 +88,7 @@ def check_accuracy(df,col,clusters):
         
         #Then calculate the probability of each data point being of the most common type
         freq=[occurence/len(cluster) for occurence in occ]
-        probabilities.append(np.max(freq))
+        probabilities.append(np.max(freq).round(2))
     return probabilities
 
 #Normalize dataframe by subtracting column mean value in each column
@@ -106,21 +106,20 @@ k=4
 centroids=initialize(df,k)
 #Run algorithm
 dist=1000
-old_dist=1
 clusters=[ [] for el in range(k)] 
 count=0
-while abs(dist-old_dist) > 0.1:    
+while abs(dist) > 0.1:    
     #Divide data points into clusters       
     clusters=get_clusters(df,clusters,centroids)
-    cent_old=centroids
     #Calculate new centroids
-    centroids=calc_centroids(clusters,centroids)
+    new_centroids=calc_centroids(clusters,centroids)
     #Calculate distance of new centroids to old
-    old_dist=dist
     tot_dist=0
-    for i,cent in enumerate(centroids):
-        tot_dist=tot_dist+np.linalg.norm(cent-cent[i])
+    for i,cent in enumerate(new_centroids):
+        tot_dist=tot_dist+np.linalg.norm(cent-centroids[i])
     dist=tot_dist/4
+    print(dist)
+    centroids=new_centroids.copy()
     count+=1
     
 #Check accuracy
