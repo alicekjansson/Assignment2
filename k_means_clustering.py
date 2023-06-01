@@ -26,11 +26,10 @@ df=pd.read_csv(r'C:/Users/Alice/OneDrive - Lund University/Dokument/GitHub/Assig
 def initialize(df,k):
     centroids=[]
     df=df.drop('Scenario',axis=1)
-    dfcentroids=df.sample(k)
-    print(dfcentroids)
+    dfcentroids=df.sample(k)        #Sample k initial data points
+    #Rewrite dataframe as list of arrays
     for n,row in dfcentroids.transpose().items():
-        cent=np.array(row)
-        centroids.append(cent)
+        centroids.append(np.array(row))
     return centroids
 
 # Divide data points into clusters based on nearest centroid
