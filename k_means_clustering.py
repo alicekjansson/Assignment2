@@ -90,7 +90,7 @@ def check_accuracy(df,col,clusters):
         probabilities.append(np.max(freq))
     return probabilities
 
-#Normalize dataframe by dividing by column mean value in each column
+#Normalize dataframe by subtracting column mean value in each column
 def normalize(df):
     for i,col in df.items():
         if i!= 'Scenario':
