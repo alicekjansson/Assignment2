@@ -58,13 +58,14 @@ def get_clusters(df,clusters,centroids):
 # Input parameters clusters (defined clusters to divide data into) and centroids (centroids of clusters)
 # Returns list of new centroids
 def calc_centroids(clusters,centroids):
+    new_centroids=list(np.zeros(len(centroids)))
     for n,cluster in enumerate(clusters):
         cluster=cluster.drop('Scenario',axis=1)
         cs=[]
-        for i,row in cluster.items():
-            cs.append(row.mean())
-        centroids[n]=np.array(cs)
-    return centroids
+        for i,col in cluster.items():
+            cs.append(col.mean())
+        new_centroids[n]=np.array(cs)
+    return new_centroids
 
 # Check the frequency of different values in each cluster
 # Input parameters df (dataframe containing data points), col (column defining the type of each data point) 
